@@ -3,20 +3,22 @@ FLAGS = -Wall -Werror -Wextra -std=c++98
 
 OBJ_DIR = obj
 
-SRCS = main.cpp
+SRCS = main.cpp \
+	Fixed.cpp
 
 OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
-TARGET = Brainz.out
+TARGET = a.out
 
 all: $(TARGET)
 	@echo
 	@cat .art | while IFS= read -r line; do \
 	    echo "$$line"; \
-	    sleep 0.1; \
+	    sleep 0.05; \
 	  done
 	@echo
 	
+quick: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CC) $(FLAGS) $^ -o $@
@@ -38,4 +40,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean all re 
+.PHONY: clean fclean all re quick

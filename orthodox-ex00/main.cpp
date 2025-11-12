@@ -1,5 +1,15 @@
-#include <iostream>
-int main()
+#include "Fixed.hpp"
+
+// todo 
+// understand 3 pages
+// + understand assignment
+//
+int	main()
 {
-return 0;
+	Box	first("HAHA");
+	Box	second = first;
+	Box	ass("COPY ASSIGNMENT");
+
+	ass = second;
+	return 0;
 }
