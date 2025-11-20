@@ -1,39 +1,32 @@
 #include "Fixed.hpp"
 
+// ok const int, means we can not adjust it. it's constant
+// its an integral number
+// the number of fractional bits... what is it and why is it 8?
+const int Fixed::_number_of_fractional_bits = 8;
+
 // default constructor
-Box::Box(std::string name) : _name(name)
+Fixed::Fixed() : _fixed_point_number(0)
 {
-
-	std::cout << "Default Constructor : " << this->_name << std::endl;
+	std::cout << "😑 Default Constructor called" << std::endl;
 }
 
-// copy ocnstructor
-// /creates a new object, same as other
-
-Box::Box(const Box& other) : _name(other._name)
+// copy constructor
+//
+// Q	is this deep copy / shallow copy?
+// 	i think shallow copy
+Fixed::Fixed(const Fixed &other)
 {
-	std::cout << "Copy Constructor : " << this->_name <<  std::endl;
-
-	
-
+	std::cout << "©opy ©onstructor ©alled" << std::endl;
+	*this = other;
 }
 
-// assignemnt constructor
-// assign to an existing object
 
-Box& Box::operator=(const Box& other)
+// copy assignment operator
+Fixed &Fixed::operator=(const Fixed &other)
 {
-	std::cout << "Copy Assignment operator : " << other._name << std::endl;
+	std::cout << "Copy ASSignment operator called" << std::endl;
 	if (this != &other)
-		
-	{
-		this->_name = other._name;
-	}
+		this->_fixed_point_number = other.GetRawBits();
 	return *this;
 }
-
-Box::~Box() 
-{
-	std::cout << "🐴 DESTRUCTOR : " << this->_name << std::endl;
-}
-

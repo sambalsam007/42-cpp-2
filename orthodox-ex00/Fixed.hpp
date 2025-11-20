@@ -3,15 +3,20 @@
 
 # include <iostream>
 
-class	Box
+class	Fixed
 {
 	private:
-		std::string _name;
+		int			_fixed_point_number;
+		static const int	_number_of_fractional_bits;
+
 	public:
-		Box(std::string name);
-		Box(const Box& other);
-		Box& operator=(const Box& other);
-		~Box();
+		Fixed(); // default constructor
+		Fixed(const Fixed &other); // copy constructor
+		Fixed &operator=(const Fixed &other); // copy assigment
+		~Fixed(); // Destructor
+
+	int	GetRawBits(void) const;
+	void	SetRawBits(int const raw);
 };
 
 #endif // FIXED_HPP
