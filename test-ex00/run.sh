@@ -1,4 +1,5 @@
 #!/bin/bash
+[[ "$1" == '1' ]] && fyle-tracker run.sh *pp && exit
 div()
 {
 	printf '%*s\n' "$(tput cols)" '' | tr ' ' '_'
@@ -12,3 +13,4 @@ make re
 div
 ./a.out
 div
+make fclean
