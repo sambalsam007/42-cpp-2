@@ -5,10 +5,17 @@ int	Test::special = 1;
 Test::Test() : Stuff1("ahaah"), Stuff2("ohoh") {}
 
 // copy constructor
-Test::Test(Test const &other)
+Test::Test(const Test &other)
 {
 	this->special = other.special;
 	this->Stuff1 = other.Stuff1;
+}
+
+// copy ass operator
+Test	&Test::operator=(const Test &other)
+{
+	this->special = other.special;
+	return (*this);
 }
 
 void	Test::PrintSpecial()
@@ -23,8 +30,11 @@ int	main()
 {
 	Test obj;
 	Test copyConstrObj(obj);
+	Test ass;
 
-	obj.PrintSpecial();
-	copyConstrObj.PrintSpecial();
+	// obj.PrintSpecial();
+	// copyConstrObj.PrintSpecial();
+	ass = obj;
+	ass.PrintSpecial();
 	return 0;
 }

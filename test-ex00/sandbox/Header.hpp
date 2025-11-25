@@ -9,7 +9,8 @@ class	Test
 		std::string	Stuff2;
 	public:
 		Test();
-		Test(Test const &other);
+		Test(const Test &other);
+		Test &operator=(const Test &other);
 		void		PrintSpecial();
 
 };
