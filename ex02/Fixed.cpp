@@ -170,3 +170,35 @@ Fixed	Fixed::operator -- (int)
 	this->fixedPointNumberValue--;
 	return temp;
 }
+
+/***********/
+/* min-max */
+/***********/
+
+Fixed	&Fixed::min(Fixed &a, Fixed &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+const Fixed	&Fixed::min(Fixed const &a, Fixed const &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+Fixed	&Fixed::max(Fixed &a, Fixed &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+const Fixed	&Fixed::max(Fixed const &a, Fixed const &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
