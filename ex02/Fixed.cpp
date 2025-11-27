@@ -4,35 +4,37 @@ const int Fixed::numberOfFractionalBits = 8;
 
 Fixed::Fixed() : fixedPointNumberValue(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int number)
 {
+	// std::cout << "Int constructor called" << std::endl;
 	fixedPointNumberValue = number * (1 << numberOfFractionalBits);
 }
 
 Fixed::Fixed(const float number)
 {
-	fixedPointNumberValue = static_cast<int>(number * (1 << numberOfFractionalBits));
+	// std::cout << "Float constructor called" << std::endl;
+	fixedPointNumberValue = roundf(number * (1 << numberOfFractionalBits));
 }
 
 Fixed::Fixed(const Fixed &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 	this->fixedPointNumberValue = other.fixedPointNumberValue;
 }
 
 Fixed	&Fixed::operator=(const Fixed &other)
 {
-	std::cout << "Copy assignment operator" << std::endl;
+	// std::cout << "Copy assignment operator" << std::endl;
 	this->fixedPointNumberValue = other.fixedPointNumberValue;
 	return (*this);
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const
@@ -83,7 +85,7 @@ bool	Fixed::operator >= (Fixed const &other) const
 
 bool	Fixed::operator <= (Fixed const &other) const
 {
-	return (fixedPointNumberValue >= other.fixedPointNumberValue);
+	return (fixedPointNumberValue <= other.fixedPointNumberValue);
 }
 
 bool	Fixed::operator == (Fixed const &other) const
@@ -102,22 +104,37 @@ bool	Fixed::operator != (Fixed const &other) const
 
 Fixed	Fixed::operator + (Fixed const &other) const
 {
-	return (Fixed(toFloat() + other.toFloat()));
+	Fixed	result;
+	result.setRawBits(this->fixedPointNumberValue + other.fixedPointNumberValue);
+	return	result;
 }
 
 Fixed	Fixed::operator - (Fixed const &other) const
 {
-	return (Fixed(toFloat() - other.toFloat()));
+	Fixed	result;
+	result.setRawBits(this->fixedPointNumberValue - other.fixedPointNumberValue);
+	return	result;
 }
 
 Fixed	Fixed::operator * (Fixed const &other) const
 {
-	return (Fixed(toFloat() * other.toFloat()));
+	Fixed	result;
+	long	temp;
+
+	temp = (long)this->fixedPointNumberValue * (long)other.fixedPointNumberValue;
+	temp >>= numberOfFractionalBits;
+	result.setRawBits((int)temp);
+	return result;
 }
 
 Fixed	Fixed::operator / (Fixed const &other) const
 {
-	return (Fixed(toFloat() / other.toFloat()));
+	Fixed	result;
+	long	temp;
+
+	temp = ((long)this->fixedPointNumberValue << numberOfFractionalBits) / other.fixedPointNumberValue;
+	result.setRawBits((int)temp);
+	return result;
 }
 
 /*************************/
@@ -126,6 +143,30 @@ Fixed	Fixed::operator / (Fixed const &other) const
 
 Fixed	Fixed::operator ++ (void) 
 {
-	fixedPointNumberValue++;
+	this->fixedPointNumberValue++;
 	return (*this);
+}
+
+Fixed	Fixed::operator ++ (int)
+{
+	Fixed	temp;
+
+	temp = *this;
+	this->fixedPointNumberValue++;
+	return temp;
+}
+
+Fixed	Fixed::operator -- (void) 
+{
+	this->fixedPointNumberValue--;
+	return (*this);
+}
+
+Fixed	Fixed::operator -- (int)
+{
+	Fixed	temp;
+
+	temp = *this;
+	this->fixedPointNumberValue--;
+	return temp;
 }
