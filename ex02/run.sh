@@ -9,9 +9,9 @@ div()
 clear
 date
 div
-make fclean
-make quick
+make fclean &>/dev/null
+make quick 
 div
 ./a.out
 div
-make fclean
+make fclean &>/dev/null 

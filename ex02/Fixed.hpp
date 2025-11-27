@@ -15,6 +15,25 @@ class	Fixed
 		Fixed &operator=(const Fixed &other);
 		~Fixed();
 
+		// operators
+		bool	operator > (Fixed const &other) const;
+		bool	operator < (Fixed const &other) const;
+		bool	operator >= (Fixed const &other) const;
+		bool	operator <= (Fixed const &other) const;
+		bool	operator == (Fixed const &other) const;
+		bool	operator != (Fixed const &other) const;
+
+		// arithmetic operators
+
+		Fixed	operator + (Fixed const &other) const;
+		Fixed	operator - (Fixed const &other) const;
+		Fixed	operator * (Fixed const &other) const;
+		Fixed	operator / (Fixed const &other) const;
+
+		// increment/decrement
+
+		Fixed	operator ++ (void);
+
 		int	getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
